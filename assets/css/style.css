@@ -1,7 +1,50 @@
-#jumbo {
-    background-color: red;
+body{
+    font-family: 'Press Start 2P', cursive;
+    background-color: black;
+}
+.jumbotron{
+    position: relative;
+    height: 400px;
+    color: white;
+    background: url("../images/jumbocover.jpg") no-repeat center center; 
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    background-size: 100% 100%;
 }
 
+div#wrap {
+    position: absolute;
+    bottom: 5%;
+    left: 40%;
+}
+div#letter-div{
+    margin-top: 10px;
+}
+div.card{
+    border: 5px solid #71f14a;
+}
+div.card-header{
+    background-color: #fbe74e;
+}
 button.bttn-margin {
     margin: 5px;
 }
+
+#letter-buttons, #wrong-buttons {
+    text-align: center;
+    background-color: rgb(250, 156, 34);
+}
+
+.button-css {
+    color: white;
+    background-color: black;
+    border: 3px solid #c171b4;
+    border-radius: .5rem;
+    height: 35px;
+    width: 30px;
+    padding: 10px;
+    text-align: center;
+    font-size: .5rem;
+}
+

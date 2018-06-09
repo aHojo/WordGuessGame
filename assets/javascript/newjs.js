@@ -1,45 +1,4 @@
 const letterButtons = document.getElementById('letter-buttons');
-var hints = [{
-                pic: 'assets/images/futaba.png',
-                hint: 'Change people\'s hearts!'
-            }, 
-            {
-                pic:"assets/images/wowchar.png",
-                hint:'LEEROYYYY JENKINSSSSSS'
-            },
-            {
-                pic:"assets/images/novayis.png",
-                hint:'Two aliens races and the humans try to conquer each other.'
-            },
-            {
-                pic:"assets/images/cloudguy.png",
-                hint:'Man runs around eating mushrooms, and jumping on people\'s heads.'
-            },
-            {
-                pic:"assets/images/tinytina.png",
-                hint:'Tiny Tina'
-            },
-            {
-                pic:"assets/images/skyrtroll.png",
-                hint:'Game where you mod, admire, then don\'t even start, or get an arrow to the knee.'
-            },
-            {
-                pic:"assets/images/doom.png",
-                hint:'BLOW THINGS UP!'
-            },
-            {
-                pic:"assets/images/witcher.png",
-                hint:'Ballet with a sword.'
-            },
-            {
-                pic:"assets/images/farcry.jpg",
-                hint:'Rhinos will end you.'
-            },
-            {
-                pic:"assets/images/bioshock.jpg",
-                hint:'Friendly little girls with a needle.'
-            }];
-var randomNum;
 //guesses to start with
 //variable to store clicked letter
 var clickedItem
@@ -49,10 +8,11 @@ var wins = 0;
 var losses = 0;
 var choice;
 //List of games to be used in hangman game. 
-const gameList = ["PERSONA", "WARCRAFT", "STARCRAFT", "MARIO", "BORDERLANDS", "SKYRIM", "DOOM", "WITCHER", "FARCRY", "BIOSHOCK"];
+const gameList = ["PERSONA FIVE"];
 var underscores = [];
 var lettersGuessed = [];
 var blanks;
+var winCondCheck
 //Store the game that was chosen
 var gameChosen;
 var gameLetters;
@@ -67,16 +27,20 @@ function gameStart(){
     if(!hasLetterButtons){
        wonGame = false;
         printButtons();
-        randNum = Math.floor(Math.random() * gameList.length);
-        gameChosen = gameList[randNum];
+        gameChosen = gameList[Math.floor(Math.random() * gameList.length)];
         gameLetters = gameChosen.split('');
         guessesLeft = gameChosen.length;
+        allowedGuesses = gameChosen.length;
         blanks = gameChosen.length;
         underscores = [];
         
 
         for(let i = 0; i < blanks; i ++){
+            if(gameLetters[i] === " "){
+                underscores.push('&nbsp;');
+            }else{
                 underscores.push("_");
+            }
             
         }
 
@@ -85,8 +49,6 @@ function gameStart(){
         document.getElementById('letter-picked').textContent = ` `;
         document.getElementById('wins').textContent = `Wins: ${wins}`;
         document.getElementById('lose').textContent = `Losses: ${losses}`;
-        document.getElementById('game-image').src = hints[randNum].pic;
-        document.getElementById('hint').innerHTML = `Hint: ${hints[randNum].hint}`;
 
         // console.log(document.getElementById('letter-button').dataset.letter);
         console.log(gameLetters);
@@ -103,7 +65,7 @@ function printButtons() {
             var button = document.createElement('button');
             button.setAttribute('data-letter', letters[i]);
             button.setAttribute('id', "letter-button");
-            button.classList.add('btn', 'button-css', 'bttn-margin');
+            button.classList.add('btn', 'btn-danger', 'bttn-margin');
             button.textContent = letters[i];
             letterButtons.appendChild(button);
             
@@ -154,8 +116,15 @@ function choiceCheck(letter) {
 }
 
 function winCheck(){
-   
-    if(underscores.toString() === gameLetters.toString()){
+    winCondCheck = underscores;
+    for (let i = 0; i < blanks; i++){
+        if (underscores[i] === "&nbsp;"){
+            winCondCheck[i] = " ";
+        } else {
+            winCondCheck[i] = underscores[i];
+        }
+    }
+    if(winCondCheck.toString() === gameLetters.toString()){
         alert('You Win!')
         wins++;
         document.getElementById('wins').textContent = `Wins: ${wins}`;
@@ -190,8 +159,6 @@ document.querySelector(".reset-game").addEventListener("click", function() {
     document.getElementById('letter-picked').textContent = ` `;
     document.getElementById('wins').textContent = `Wins: ${wins}`;
     document.getElementById('lose').textContent = `Losses: ${losses}`;
-    document.getElementById('game-image').src = "";
-        document.getElementById('hint').innerHTML = "";
     
     
 });

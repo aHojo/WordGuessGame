@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <link rel='stylesheet' href="assets/css/style.css">
     <title>Hangman</title>
 </head>
@@ -12,11 +13,22 @@
     <div id="jumbo" class="jumbotron text-center">
         <h1 class="display-4">Video Game Hangman!</h1>
         <hr class="my-4">
-        <p>Press button to start game.</p>
-        <button class="btn btn-primary btn-lg start-game">FIGHT!</button>
+        <div id="wrap">
+          <p>Press button to start game.</p>
+          <a href="#guess-area"><button class="btn btn-primary btn-lg start-game">FIGHT!</button></a>
+          <button class="btn btn-primary btn-lg reset-game">RESET</button>
+        </div>
+        
       </div>
 
       <div class="card">
+        <div class="card-header">
+          Wrong Letters
+        </div>
+        <div id="wrong-buttons" class="card-body"></div>
+      </div>
+      
+      <div id="letter-div" class="card">
         <div class="card-header">
           Letters
         </div>
@@ -26,20 +38,21 @@
       <div class="row mt-4">
         <div class="col-sm-6">
           <div class="card">
-            <div class="card-body">
-              <img alt="img will go here">
+            <div id="game2" class=".game card-body text-center">
+              <img id="game-image" class="img-fluid img-thumbnail" alt="img will go here">
+              <p id='hint'></p>
             </div>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="card">
-            <div class="card-body">
+            <div id="game1" class=".game card-body">
               <h5 class="card-title">Click a letter to make a guess!</h5>
               <p id="guess-area" class="card-text">_ _ _ _ _</p>
-              <p id="guess-count" class="card-text">Guesses Left: </p>
-              <p id="letter-picked" class="card-text">Letters Guessed: </p>
-              <p id='wins' class="card-text">Wins: </p>
-              <p id='lose'class="card-text">Losses: </p>
+              <p id="guess-count" class="card-text">Guesses Left: 0</p>
+              <p id="letter-picked" class="card-text">Letters Guessed: 0</p>
+              <p id='wins' class="card-text">Wins: 0</p>
+              <p id='lose'class="card-text">Losses: 0</p>
             </div>
           </div>
         </div>
