@@ -99,6 +99,13 @@ function choiceCheck(letter) {
         }
     }
     if(letterFound){
+        for (let i = 0; i < blanks; i++){
+            if (underscores[i] === " "){
+                underscores[i] = "&nbsp;";
+            } else {
+                underscores[i] = underscores[i];
+            }
+        }
         for(let i = 0; i < blanks; i ++) {
             if(gameLetters[i] === letter){
                 underscores[i] = letter;

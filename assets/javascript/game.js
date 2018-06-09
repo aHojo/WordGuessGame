@@ -40,6 +40,7 @@ var hints = [{
                 hint:'Friendly little girls with a needle.'
             }];
 var randomNum;
+var winCondCheck;
 //guesses to start with
 //variable to store clicked letter
 var clickedItem
@@ -49,7 +50,7 @@ var wins = 0;
 var losses = 0;
 var choice;
 //List of games to be used in hangman game. 
-const gameList = ["PERSONA", "WARCRAFT", "STARCRAFT", "MARIO", "BORDERLANDS", "SKYRIM", "DOOM", "WITCHER", "FARCRY", "BIOSHOCK"];
+const gameList = ["PERSONA", "WORLD OF WARCRAFT", "STARCRAFT", "SUPER MARIO", "BORDERLANDS", "THE ELDER SCROLLS", "DOOM", "WITCHER", "FARCRY", "BIOSHOCK"];
 var underscores = [];
 var lettersGuessed = [];
 var blanks;
@@ -76,7 +77,11 @@ function gameStart(){
         
 
         for(let i = 0; i < blanks; i ++){
+            if(gameLetters[i] === " "){
+                underscores.push('&nbsp;');
+            }else{
                 underscores.push("_");
+            }
             
         }
 
@@ -137,6 +142,15 @@ function choiceCheck(letter) {
         }
     }
     if(letterFound){
+
+        for (let i = 0; i < blanks; i++){
+            if (underscores[i] === " "){
+                underscores[i] = "&nbsp;";
+            } else {
+                underscores[i] = underscores[i];
+            }
+        }
+
         for(let i = 0; i < blanks; i ++) {
             if(gameLetters[i] === letter){
                 underscores[i] = letter;
@@ -154,8 +168,17 @@ function choiceCheck(letter) {
 }
 
 function winCheck(){
+
+    winCondCheck = underscores;
+    for (let i = 0; i < blanks; i++){
+        if (underscores[i] === "&nbsp;"){
+            winCondCheck[i] = " ";
+        } else {
+            winCondCheck[i] = underscores[i];
+        }
+    }
    
-    if(underscores.toString() === gameLetters.toString()){
+    if(winCondCheck.toString() === gameLetters.toString()){
         alert('You Win!')
         wins++;
         document.getElementById('wins').textContent = `Wins: ${wins}`;
@@ -191,7 +214,7 @@ document.querySelector(".reset-game").addEventListener("click", function() {
     document.getElementById('wins').textContent = `Wins: ${wins}`;
     document.getElementById('lose').textContent = `Losses: ${losses}`;
     document.getElementById('game-image').src = "";
-        document.getElementById('hint').innerHTML = "";
+    document.getElementById('hint').innerHTML = "";
     
     
 });
