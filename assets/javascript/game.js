@@ -1,4 +1,5 @@
 const letterButtons = document.getElementById('letter-buttons');
+var time;
 var hints = [{
                 pic: 'assets/images/futaba.png',
                 hint: 'Change people\'s hearts!'
@@ -75,6 +76,9 @@ function gameStart(){
         blanks = gameChosen.length;
         underscores = [];
         
+        if(guessesLeft > 6){
+            guessesLeft = 5;
+        }
 
         for(let i = 0; i < blanks; i ++){
             if(gameLetters[i] === " "){
@@ -179,13 +183,14 @@ function winCheck(){
     }
    
     if(winCondCheck.toString() === gameLetters.toString()){
-        alert('You Win!')
         wins++;
         document.getElementById('wins').textContent = `Wins: ${wins}`;
+        alert("You are a smarty pants!"); 
     } else if (guessesLeft === 0){
         losses++;
         document.getElementById('lose').textContent = `Losses: ${losses}`;
         wonGame = true;
+        alert("Try again!");
     }
 }
 
@@ -211,8 +216,6 @@ document.querySelector(".reset-game").addEventListener("click", function() {
     document.getElementById('guess-area').textContent = '_ _ _ _ _ _'; 
     document.getElementById('guess-count').textContent = `Guesses Left: ${guessesLeft}`;
     document.getElementById('letter-picked').textContent = ` `;
-    document.getElementById('wins').textContent = `Wins: ${wins}`;
-    document.getElementById('lose').textContent = `Losses: ${losses}`;
     document.getElementById('game-image').src = "";
     document.getElementById('hint').innerHTML = "";
     
