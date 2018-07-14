@@ -47,4 +47,6 @@ button.bttn-margin {
     text-align: center;
     font-size: .5rem;
 }
-
+.card-columns {
+    padding: 20px;
+}
